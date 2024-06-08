@@ -22,7 +22,7 @@ export class CoursesService {
 
   // TODO Mudar para DTO depois
   create(data: any) {
-    this.courses.push(...data);
+    this.courses.push(data);
   }
 
   // TODO Mudar para DTO depois

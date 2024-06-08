@@ -6,9 +6,8 @@ import {
   HttpCode,
   HttpStatus,
   Param,
-  Patch,
   Post,
-  Res,
+  Put,
 } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 
@@ -17,34 +16,33 @@ export class CoursesController {
   constructor(private readonly courseService: CoursesService) {}
 
   @Get()
-  findAll(@Res() response) {
+  findAll() {
     //return response.status(200).send('Listagem de cursos');
-    return response.status(200).json({ message: 'Listagem de cursos' });
+    return this.courseService.findAll();
   }
 
   @Get('find/:id')
   // Com desconstrução: findOne(@Param('id') id: string)
   // Sem: findOne(@Param() params) -> params.id
-  findOne(@Param('id') id: string) {
-    return 'Return obj ' + id;
+  findOne(@Param('id') id: number) {
+    return this.courseService.find(Number(id));
   }
 
   // @HttpCode(204) Usado para excluir recursos
   @Post()
   create(@Body() body) {
-    return body;
+    return this.courseService.create(body);
   }
 
-  @Patch('update/:id')
-  update(@Param('id') id: string, @Body() body: any) {
-    console.log(body);
-    return `Update course with id ${id}`;
+  @Put('update/:id')
+  update(@Param('id') id: number, @Body() body: any) {
+    return this.courseService.update(id, body);
   }
 
   //@HttpCode(204)
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete('delete/:id')
-  remove(@Param('id') id: string) {
-    return `Delete course with id ${id}`;
+  remove(@Param('id') id: number) {
+    return this.courseService.remove(id);
   }
 }
