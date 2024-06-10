@@ -1,7 +1,4 @@
-import {
-  /* HttpException, HttpStatus, */ Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Course } from './courses.entity';
 
 @Injectable()
@@ -22,21 +19,15 @@ export class CoursesService {
   findOne(id: number) {
     const course = this.courses.find((course) => course.id === id);
     if (!course) {
-      /* throw new HttpException(
-        `Course Id ${id} not found`,
-        HttpStatus.NOT_FOUND,
-      ); */
       throw new NotFoundException(`Course Id ${id} not found`);
     }
     return course;
   }
 
-  // TODO Mudar para DTO depois
   create(data: any) {
     this.courses.push(data);
   }
 
-  // TODO Mudar para DTO depois
   update(id: number, data: any) {
     const existingCourse = this.findOne(id);
     console.log(this.findOne(id));

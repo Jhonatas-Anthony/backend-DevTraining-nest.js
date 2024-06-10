@@ -19,7 +19,6 @@ export class CoursesController {
 
   @Get()
   findAll() {
-    //return response.status(200).send('Listagem de cursos');
     return this.courseService.findAll();
   }
 
@@ -28,7 +27,6 @@ export class CoursesController {
     return this.courseService.findOne(Number(id));
   }
 
-  // @HttpCode(204) Usado para excluir recursos
   @Post()
   create(@Body() body: CreateCourseDTO) {
     return this.courseService.create(body);
@@ -39,7 +37,6 @@ export class CoursesController {
     return this.courseService.update(Number(id), body);
   }
 
-  //@HttpCode(204)
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete('delete/:id')
   remove(@Param('id') id: number) {
