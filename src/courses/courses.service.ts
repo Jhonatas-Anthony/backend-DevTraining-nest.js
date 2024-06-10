@@ -26,6 +26,7 @@ export class CoursesService {
 
   create(data: any) {
     this.courses.push(data);
+    return data;
   }
 
   update(id: number, data: any) {
