@@ -10,6 +10,8 @@ import {
   Put,
 } from '@nestjs/common';
 import { CoursesService } from './courses.service';
+import { CreateCourseDTO } from './dto/create-courses.dto';
+import { UpdateCourseDTO } from './dto/update-course.dto';
 
 @Controller('courses')
 export class CoursesController {
@@ -28,12 +30,12 @@ export class CoursesController {
 
   // @HttpCode(204) Usado para excluir recursos
   @Post()
-  create(@Body() body) {
+  create(@Body() body: CreateCourseDTO) {
     return this.courseService.create(body);
   }
 
   @Put('update/:id')
-  update(@Param('id') id: number, @Body() body: any) {
+  update(@Param('id') id: number, @Body() body: UpdateCourseDTO) {
     return this.courseService.update(id, body);
   }
 
