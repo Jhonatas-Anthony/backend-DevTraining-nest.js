@@ -16,7 +16,7 @@ export class CoursesService {
     return this.courses;
   }
 
-  find(id: number) {
+  findOne(id: number) {
     return this.courses.find((course) => course.id === id);
   }
 
@@ -27,7 +27,7 @@ export class CoursesService {
 
   // TODO Mudar para DTO depois
   update(id: number, data: any) {
-    const existingCourse = this.find(id);
+    const existingCourse = this.findOne(id);
     if (existingCourse) {
       const index = this.courses.findIndex((course) => course.id === id);
       this.courses[index] = {

@@ -22,10 +22,8 @@ export class CoursesController {
   }
 
   @Get('find/:id')
-  // Com desconstrução: findOne(@Param('id') id: string)
-  // Sem: findOne(@Param() params) -> params.id
   findOne(@Param('id') id: number) {
-    return this.courseService.find(Number(id));
+    return this.courseService.findOne(Number(id));
   }
 
   // @HttpCode(204) Usado para excluir recursos
