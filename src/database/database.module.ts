@@ -1,29 +1,25 @@
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Course } from 'src/courses/entities/courses.entity';
 import { Tag } from 'src/courses/entities/tags.entity';
-import { DataSourceOptions } from 'typeorm';
-
-// Boas práticas: esses valores devem estar presentes no dotENV
-export const dataSourceOptions: DataSourceOptions = {
-  type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: 'docker',
-  database: 'devtraining',
-  entities: [Course, Tag],
-  synchronize: false,
-};
 
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
-      useFactory: async () => {
+      useFactory: async (config: ConfigService) => {
         return {
-          ...dataSourceOptions,
+          type: 'postgres',
+          host: config.get('DB_HOST'),
+          port: Number(config.get('DB_PORT')),
+          username: config.get('DB_USER'),
+          password: config.get('DB_PASS'),
+          database: config.get('DB_NAME'),
+          entities: [Course, Tag],
+          synchronize: false,
         };
       },
+      inject: [ConfigService],
     }),
   ],
 })
