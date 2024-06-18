@@ -4,7 +4,7 @@ export default {
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
-  colectionCoverageFrom: ['**/*.(t|j)s$'],
+  collectCoverageFrom: ['**/*.(t|j)s$'],
   coverageDirectory: '../coverage',
   testEnviroment: 'node',
 };
